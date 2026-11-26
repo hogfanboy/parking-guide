@@ -1,21 +1,11 @@
 {
- "_note": "Board mm, origin bottom-left, y up, rotation deg (EasyEDA footprint centres). Placed 2026-11-25 against the real footprints. U1 row spacing and U3 ear-hole spacing are ESTIMATES until measured with calipers.",
+ "_note": "Board mm, origin bottom-left, y up, rotation deg (EasyEDA footprint origins: U1 = its pad 1, others = centre). U1 = ESP32-C3 SuperMini OLED, pad 1 (5V) at the USB end, top. Sensor header and ear-hole spacing are ESTIMATES until measured.",
  "_layout": "Top edge: USB-C of the C3 Zero and the J2 opener terminal (both cables leave toward the opener). Bottom-right: sensor U3, nothing tall within 10 mm. Top-right: buzzer. Bottom-left: spare buttons. Keep copper and pour out from under the C3 antenna (bottom end of U1).",
  "board": [
   64,
   46
  ],
  "parts": {
-  "U1L": [
-   9.38,
-   34.25,
-   270
-  ],
-  "U1R": [
-   24.62,
-   34.25,
-   270
-  ],
   "U3": [
    44.5,
    8.5,
@@ -56,11 +46,6 @@
    23.5,
    0
   ],
-  "R6": [
-   53.25,
-   20.5,
-   0
-  ],
   "Q1": [
    40.0,
    21.0,
@@ -92,13 +77,18 @@
    90
   ],
   "SW1": [
-   11.0,
-   7.0,
+   12.0,
+   7.5,
    0
   ],
   "SW2": [
-   21.0,
-   7.0,
+   22.0,
+   7.5,
+   0
+  ],
+  "U1": [
+   9.0,
+   42.5,
    0
   ]
  },
@@ -125,9 +115,9 @@
  },
  "antenna_keepout": [
   8.0,
-  16.5,
-  26.0,
-  23.0
+  18.0,
+  28.5,
+  23.5
  ],
  "mount_holes": {
   "at": [
@@ -182,11 +172,11 @@
   ]
  },
  "outlines": {
-  "U1_C3Zero": [
-   8.0,
-   21.4,
-   26.0,
-   44.9
+  "U1_SuperMini": [
+   7.9,
+   23.0,
+   27.9,
+   45.5
   ],
   "U3_VL53L8CX": [
    28.0,
