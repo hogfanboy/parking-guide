@@ -10,12 +10,13 @@ Design the PCB in EasyEDA and order 5 boards (2 needed).
 - U3 = VL53L8CX: public-library part, footprint changed to 1x9 through-hole by Hog; in PCB and BOM.
 - I2C only (SPI_I2C_N GND, NCS 3V3, MISO NC). JP1, R7, R8 and R6 removed (buzzer straight to the drain).
 - Buttons: TS-1102 vertical 6x6 (C2916316), pin 1 to GPIO, diagonal pin 4 to GND, internal pull-ups.
-- PCB (2026-11-26): 64 x 46 mm, placed per hardware/layout.json. U1 pad 1 at (9.0, 42.5) with USB at the top edge,
-  antenna keepout 8-28.5 x 18-23.5 mm. U3 header row at y 8.5 between the M2 ear holes (30.5/58.5, 12).
-  U3 footprint (Hog): 9 PTH pads 1.5 x 3.5 mm oblong across the row, 1.0 mm holes, 2.54 mm pitch (1.04 mm gap).
-- Routed on 2 layers, GND on tracks (no pour): +5V/+3V3/GND 1 mm, signals 0.25 mm, 27 vias. DRC 0 errors.
+- PCB V6 (2026-11-26): U1 centred, USB at the top edge; left-row parts on the left (J2, opto, Q1/R3, J3/R5),
+  right-row parts on the right (buttons, BZ1/D2, C1/C2); U3 rotated 180 across the bottom between its M2 holes.
+  Pin swap: OPENER_IN on GPIO20, LED_DATA on GPIO0. All nets routed except GND (1 mm power, 0.25 mm signals).
+- GND: one bottom pour created, but the API fill returns nothing. Waiting for Hog to try Rebuild Copper Region on
+  that one pour by hand; fallback is GND tracks between parts, mounting holes left unconnected.
 
 ## Next step
-1. Hog: check the 2D and 3D views (OLED facing the floor side, USB at the top edge, sensor clear).
+1. Fill the GND pour (or GND tracks), DRC 0. Hog: check the 2D and 3D views (OLED facing the floor side, USB at the top edge, sensor clear).
 2. Calipers on the sensor once it arrives (header position, ear-hole spacing), then re-place U3 and re-route.
 3. Order 5 boards.

@@ -6,7 +6,9 @@ await new Promise(r => setTimeout(r, 800));
 const L = __LAYOUT__;
 const mil = v => Math.round(v / 0.0254 * 1000) / 1000;
 const log = [];
-for (const p of await eda.pcb_PrimitivePad.getAll()) if (!p.getState_ParentPrimitiveId?.()) { try { await eda.pcb_PrimitivePad.delete([p.getState_PrimitiveId()]); } catch (e) {} }
+// ONLY our own free pads (MH*/EH*): pcb_PrimitivePad.getAll() can include component pads, and deleting those
+// silently breaks the footprints and drops every net from the PCB net list.
+for (const p of await eda.pcb_PrimitivePad.getAll()) if (/^(MH|EH)\d+$/.test(p.getState_PadNumber()) && !p.getState_ParentComponentPrimitiveId?.()) { try { await eda.pcb_PrimitivePad.delete([p.getState_PrimitiveId()]); } catch (e) {} }
 for (const v of await eda.pcb_PrimitiveVia.getAll()) await eda.pcb_PrimitiveVia.delete([v.getState_PrimitiveId()]);
 for (const p of await eda.pcb_PrimitivePolyline.getAll()) await eda.pcb_PrimitivePolyline.delete([p.getState_PrimitiveId()]);
 try { for (const g of await eda.pcb_PrimitiveRegion.getAll()) await eda.pcb_PrimitiveRegion.delete([g.getState_PrimitiveId()]); } catch (e) { log.push("region clear: " + e.message); }

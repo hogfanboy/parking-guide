@@ -72,3 +72,8 @@
 - `pcb_PrimitivePad.getAll()` returns only free pads. Component pads: `pcb_PrimitiveComponent.getAllPinsByPrimitiveId`.
 - `rebuildCopperRegion()` returned undefined and no fill on this board: the designer rebuilds pours by hand.
 - `pcb_Drc.getNetRules()` lists only registered nets.
+- **`pcb_PrimitivePad.getAll()` can return component pads too** (it did once routing existed). Deleting from it with a
+  loose filter removed the footprints' pads and the whole PCB net list. Only delete pads by your own names (MH*/EH*).
+  The fix after that: delete all components, Import Changes, designer clicks Apply.
+- `pcb_PrimitivePad.modify(padId, {net})` on a component pad works for net names that already exist (used to swap two
+  U1 pins without an import).

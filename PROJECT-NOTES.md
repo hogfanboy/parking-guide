@@ -18,10 +18,11 @@ on ESP32 pins. Pololu rates the same design for 3.2-5.5 V **[unverified on this 
 
 ## 3. Pins (ESP32-C3 SuperMini with 0.42" OLED) [unverified]
 BoosterTestJig library part ESP32-C3-OLED (footprint ESP32_C3_42OLED, two 1x8 rows 17.78 mm apart, pin 1 at USB).
-Mounted on the parts side so the OLED faces the floor; USB at the board's top edge.
+Mounted on the parts side so the OLED faces the floor; USB at the board's top edge, centred left to right.
+Left-row pins serve the left-side parts (opto, buzzer, LED header); right-row pins the buttons and the sensor.
 | GPIO | Net | Use |
 |---|---|---|
-| 0 | OPENER_IN | PC817C output, internal pull-up (R2 10k optional) |
+| 0 | LED_DATA | Future LED strip, 330 ohm |
 | 1 | BUZZER | 2N7000 gate (R3 100k pull-down) |
 | 3 | TOF_LPN | Sensor enable |
 | 4 | TOF_INT | Sensor data ready |
@@ -29,7 +30,7 @@ Mounted on the parts side so the OLED faces the floor; USB at the board's top ed
 | 6 | TOF_SCL | I2C clock, shared with the on-board OLED |
 | 7 | BTN1 | Spare button to GND, internal pull-up |
 | 10 | BTN2 | Spare button to GND, internal pull-up |
-| 20 | LED_DATA | Future LED strip, 330 ohm |
+| 20 | OPENER_IN | PC817C output, internal pull-up (R2 10k optional) |
 Leave GPIO2, GPIO8 (on-board LED), GPIO9 (BOOT) and GPIO21 unconnected.
 
 ## 4. Sensor [unverified]

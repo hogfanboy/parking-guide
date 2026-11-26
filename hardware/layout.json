@@ -1,94 +1,94 @@
 {
  "_note": "Board mm, origin bottom-left, y up, rotation deg (EasyEDA footprint origins: U1 = its pad 1, others = centre). U1 = ESP32-C3 SuperMini OLED, pad 1 (5V) at the USB end, top. Sensor header and ear-hole spacing are ESTIMATES until measured.",
- "_layout": "Top edge: USB-C of the C3 Zero and the J2 opener terminal (both cables leave toward the opener). Bottom-right: sensor U3, nothing tall within 10 mm. Top-right: buzzer. Bottom-left: spare buttons. Keep copper and pour out from under the C3 antenna (bottom end of U1).",
+ "_layout": "ESP (U1) centred, USB at the top edge. Left of U1 (its left-row pins): opener terminal J2 top, opto block, buzzer driver Q1/R3, LED header J3/R5. Right (right-row pins): buttons, buzzer BZ1 + flyback D2, C1/C2. Sensor U3 across the bottom, rotated so its I2C pins face the right row. Antenna keepout between U1's far end and the sensor.",
  "board": [
   64,
   46
  ],
  "parts": {
-  "U3": [
-   44.5,
-   8.5,
+  "U1": [
+   23.11,
+   42.5,
    0
   ],
+  "U3": [
+   32.0,
+   8.5,
+   180
+  ],
   "J2": [
-   37.0,
-   42.5,
+   15.0,
+   42.0,
    0
   ],
   "U2": [
-   37.0,
-   32.5,
+   11.5,
+   32.0,
    0
   ],
   "R1": [
-   31.0,
-   32.25,
+   4.0,
+   31.25,
    90
   ],
   "R2": [
-   43.0,
-   32.25,
+   19.0,
+   32.3,
    90
   ],
   "D1": [
-   37.0,
+   11.5,
    25.5,
    0
   ],
-  "BZ1": [
-   53.5,
-   32.5,
-   0
-  ],
-  "D2": [
-   53.5,
-   23.5,
-   0
-  ],
   "Q1": [
-   40.0,
-   21.0,
+   17.5,
+   21.5,
    0
   ],
   "R3": [
-   45.5,
-   23.75,
-   90
-  ],
-  "C2": [
-   30.0,
-   3.5,
-   0
-  ],
-  "C1": [
-   4.0,
-   34.0,
+   8.5,
+   18.5,
    0
   ],
   "J3": [
-   3.0,
-   27.0,
-   90
+   9.0,
+   11.0,
+   0
   ],
   "R5": [
-   3.0,
-   15.25,
+   8.5,
+   14.8,
+   0
+  ],
+  "BZ1": [
+   56.0,
+   20.5,
+   0
+  ],
+  "D2": [
+   48.0,
+   22.0,
    90
   ],
   "SW1": [
-   12.0,
-   7.5,
+   53.0,
+   37.5,
    0
   ],
   "SW2": [
-   22.0,
-   7.5,
+   53.0,
+   30.5,
    0
   ],
-  "U1": [
+  "C1": [
+   46.3,
+   42.6,
+   0
+  ],
+  "C2": [
+   52.0,
    9.0,
-   42.5,
    0
   ]
  },
@@ -96,28 +96,28 @@
   "_part": "VL53L8CX red breakout 33 x 10 mm, 1x9 header 2.54 mm, two ear holes for M2 nylon screws",
   "ear_holes": [
    [
-    30.5,
+    18.0,
     12.0
    ],
    [
-    58.5,
+    46.0,
     12.0
    ]
   ],
   "ear_hole_mm": 2.2,
   "outline": [
-   28.0,
+   15.5,
    7.0,
-   61.0,
+   48.5,
    17.0
   ],
   "_header": "U3 header row along the module long edge 1.5 mm in (y 8.5), module centre (44.5, 12)"
  },
  "antenna_keepout": [
-  8.0,
+  21.2,
   18.0,
-  28.5,
-  23.5
+  42.8,
+  23.0
  ],
  "mount_holes": {
   "at": [
@@ -173,23 +173,23 @@
  },
  "outlines": {
   "U1_SuperMini": [
-   7.9,
+   21.2,
    23.0,
-   27.9,
+   42.8,
    45.5
   ],
   "U3_VL53L8CX": [
-   28.0,
+   15.5,
    7.0,
-   61.0,
+   48.5,
    17.0
   ]
  },
  "labels": [
   [
    "ParkingGuide V1",
-   50,
-   2.4
+   54,
+   2.0
   ]
  ]
 }
