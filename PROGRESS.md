@@ -18,6 +18,9 @@ Design the PCB in EasyEDA and order 5 boards (2 needed).
   plated holes, no stitching vias). DRC 0 errors (2026-11-26). 2 routing vias.
 
 ## Next step
-1. Hog: check the 2D and 3D views (OLED facing the floor side, USB at the top edge, sensor clear).
-2. Calipers on the sensor once it arrives (header position, ear-hole spacing), then re-place U3 and re-route.
-3. Order 5 boards.
+1. Hog hand-improves the routing in EasyEDA (e.g. rotating R1). Then Claude re-checks DRC and the netlist
+   (0 mismatches against hardware/netlist.txt) and pushes. Last clean state: DRC 0 at commit f7dc6f5.
+2. Hog sends 2D top and 3D screenshots (OLED on the parts side, USB at the top edge, vertical 6x6 buttons).
+3. Calipers on the VL53L8CX once it arrives: header position on the module and M2 ear-hole spacing (28 mm guess).
+   Nudge U3 and the holes, re-route, DRC.
+4. Order 5 boards (2 layers, 1.6 mm, HASL).
