@@ -1,0 +1,19 @@
+# Build output
+build/
+.pio/
+*.elf
+*.map
+*.bin
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# Personal pictures / media - never commit
+media/
+
+# Python cache, generated one-off bridge scripts
+__pycache__/
+tools/easyeda/scripts/_*.js
