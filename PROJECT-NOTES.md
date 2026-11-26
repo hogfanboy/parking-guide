@@ -22,21 +22,19 @@ Rows seen from the top with USB up: left 5V, GND, 3V3, 0, 1, 2, 3, 4, 5; right 2
 |---|---|---|
 | 0 | OPENER_IN | PC817C output, internal pull-up (R2 10k optional) |
 | 1 | BUZZER | 2N7000 gate |
-| 2 | BTN2 | Spare button, 10k pull-up (strapping pin) |
 | 3 | TOF_LPN | Sensor enable |
-| 4 | TOF_SCL | I2C clock / SPI clock |
-| 5 | TOF_MISO | SPI only |
-| 6 | TOF_SDA | I2C data / SPI MOSI |
-| 7 | TOF_NCS | SPI chip select, high in I2C mode |
-| 8 | BTN1 | Spare button, 10k pull-up (strapping pin) |
+| 4 | TOF_SCL | I2C clock |
+| 5 | BTN1 | Spare button to GND, internal pull-up |
+| 6 | TOF_SDA | I2C data |
+| 7 | BTN2 | Spare button to GND, internal pull-up |
 | 20 | TOF_INT | Sensor data ready |
 | 21 | LED_DATA | Future LED strip, 330 ohm |
-18/19 are USB D-/D+, 9 is BOOT, 10 is free: leave them unconnected.
+18/19 are USB D-/D+, 9 is BOOT, 2 and 8 are strapping pins, 10 is free: leave them unconnected.
 
 ## 4. Sensor [unverified]
 VL53L8CX red breakout, 33 x 10 mm, 1x9 header: VIN, GND, SDA/MOSI, SCL/CLK, MISO, LPn, INT, NCS, SPI_I2C_N.
 Soldered flat on the board with its own straight header, facing the floor; two M2 nylon screws through its ears.
-JP1 sets SPI_I2C_N: GND = I2C (default), 3V3 = SPI.
+I2C only: SPI_I2C_N tied to GND, NCS tied to 3V3, MISO not connected.
 
 ## 5. Opener input [unverified]
 J2 screw terminal -> R1 4.7k -> PC817C LED (D1 1N4148 reversed across it) -> back to J2. Both units in parallel on the

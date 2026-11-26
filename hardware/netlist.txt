@@ -1,36 +1,32 @@
 # ParkingGuide V1 netlist: designator.pin NET. Source of truth for the schematic script. [unverified]
-# U1 = TENSTAR ESP32-C3 Zero on two 1x9 pin rows, pin 1 at the USB end (seen from the top, USB up):
-#   U1L (left):  1 5V, 2 GND, 3 3V3, 4 GPIO0, 5 GPIO1, 6 GPIO2, 7 GPIO3, 8 GPIO4, 9 GPIO5
-#   U1R (right): 1 GPIO21, 2 GPIO20, 3 GPIO19, 4 GPIO18, 5 GPIO10, 6 GPIO9, 7 GPIO8, 8 GPIO7, 9 GPIO6
+# U1 = ESP32-C3 SuperMini with 0.42" OLED: BoosterTestJig library part ESP32-C3-OLED (footprint ESP32_C3_42OLED,
+#   two 1x8 rows 17.78 mm apart, pin 1 at the USB end). Pins: 1 5V, 2 GND, 3 3V3, 4 GPIO20, 5 GPIO21, 6 GPIO2,
+#   7 GPIO1, 8 GPIO0 | 9 GPIO3, 10 GPIO4, 11 GPIO5/SDA, 12 GPIO6/SCL, 13 GPIO7, 14 GPIO8, 15 GPIO9, 16 GPIO10.
 # U3 = VL53L8CX red breakout, 1x9: 1 VIN, 2 GND, 3 SDA/MOSI, 4 SCL/CLK, 5 MISO, 6 LPn, 7 INT, 8 NCS, 9 SPI_I2C_N
 # U2 = PC817C: 1 A, 2 K, 3 E, 4 C.  Q1 = 2N7000 TO-92: 1 S, 2 G, 3 D (check the datasheet pin order).
-# Diodes: pin 1 = K (band), pin 2 = A.  JP1: 1 GND (I2C), 2 COM, 3 3V3 (SPI).  J2: 1 WHT (signal), 2 GRY (common).
-U1L.1 +5V
-U1L.2 GND
-U1L.3 +3V3
-U1L.4 OPENER_IN
-U1L.5 BUZZER
-U1L.6 BTN2
-U1L.7 TOF_LPN
-U1L.8 TOF_SCL
-U1L.9 TOF_MISO
-U1R.1 LED_DATA
-U1R.2 TOF_INT
-U1R.7 BTN1
-U1R.8 TOF_NCS
-U1R.9 TOF_SDA
+# Diodes: pin 1 = K (band), pin 2 = A.  J2: 1 WHT (signal), 2 GRY (common).
+# Sensor runs I2C only: SPI_I2C_N tied to GND, NCS tied to 3V3, MISO not connected. SDA/SCL are shared with the on-board OLED (GPIO5/6).
+# Unused: GPIO21, GPIO2, GPIO8 (on-board LED), GPIO9 (BOOT).
+U1.1 +5V
+U1.2 GND
+U1.3 +3V3
+U1.4 LED_DATA
+U1.7 BUZZER
+U1.8 OPENER_IN
+U1.9 TOF_LPN
+U1.10 TOF_INT
+U1.11 TOF_SDA
+U1.12 TOF_SCL
+U1.13 BTN1
+U1.16 BTN2
 U3.1 +3V3
 U3.2 GND
 U3.3 TOF_SDA
 U3.4 TOF_SCL
-U3.5 TOF_MISO
 U3.6 TOF_LPN
 U3.7 TOF_INT
-U3.8 TOF_NCS
-U3.9 TOF_MODE
-JP1.1 GND
-JP1.2 TOF_MODE
-JP1.3 +3V3
+U3.8 +3V3
+U3.9 GND
 # opener input (isolated side: OPTO_* nets never touch GND)
 J2.1 OPTO_IN
 J2.2 OPTO_RET
@@ -44,28 +40,25 @@ U2.3 GND
 U2.4 OPENER_IN
 R2.1 +3V3
 R2.2 OPENER_IN
-# buzzer (R3 100k gate pull-down; R6 0 ohm link, buzzer current set by the buzzer itself)
+# buzzer (R3 100k gate pull-down; R6 0 ohm link). In the schematic BZ1, Q1, R6 and D2 join pin to pin, so
+# BUZ_DRAIN and BUZ_NEG show as unnamed nets there.
 Q1.1 GND
 Q1.2 BUZZER
 Q1.3 BUZ_DRAIN
-R3.1 BUZZER
-R3.2 GND
+R3.1 GND
+R3.2 BUZZER
 R6.1 BUZ_DRAIN
 R6.2 BUZ_NEG
 BZ1.1 +5V
 BZ1.2 BUZ_NEG
 D2.1 +5V
 D2.2 BUZ_NEG
-# spare buttons (GPIO2 and GPIO8 are strapping pins: pull-ups keep them high at boot).
-# Tactile switch: button net on pin 1, GND on the diagonal pin 4, which switches however the legs are paired.
+# spare buttons on GPIO7 / GPIO10, to GND, internal pull-ups in firmware.
+# Tactile switch (6x6 vertical, pads 1 TL, 2 TR, 3 BL, 4 BR): button net on pin 1, GND on the diagonal pin 4.
 SW1.1 BTN1
 SW1.4 GND
-R7.1 +3V3
-R7.2 BTN1
 SW2.1 BTN2
 SW2.4 GND
-R8.1 +3V3
-R8.2 BTN2
 # future LED strip
 R5.1 LED_DATA
 R5.2 LED_OUT
