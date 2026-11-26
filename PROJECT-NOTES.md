@@ -36,7 +36,7 @@ Leave GPIO2, GPIO8 (on-board LED), GPIO9 (BOOT) and GPIO21 unconnected.
 VL53L8CX red breakout, 33 x 10 mm, 1x9 header: VIN, GND, SDA/MOSI, SCL/CLK, MISO, LPn, INT, NCS, SPI_I2C_N.
 Soldered flat on the board with its own straight header, facing the floor; two M2 nylon screws through its ears.
 I2C only: SPI_I2C_N tied to GND, NCS tied to 3V3, MISO not connected. Schematic symbol from the public library
-(its footprint is SMD, so it is left off the PCB); the PCB has free TH pads U3_1..U3_9, 33 x 10 mm silk, two M2 NPTH holes.
+with its footprint changed to 1x9 through-hole by Hog (2026-11-26).
 
 ## 5. Opener input [unverified]
 J2 screw terminal -> R1 4.7k -> PC817C LED (D1 1N4148 reversed across it) -> back to J2. Both units in parallel on the

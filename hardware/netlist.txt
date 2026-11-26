@@ -2,7 +2,7 @@
 # U1 = ESP32-C3 SuperMini with 0.42" OLED: BoosterTestJig library part ESP32-C3-OLED (footprint ESP32_C3_42OLED,
 #   two 1x8 rows 17.78 mm apart, pin 1 at the USB end). Pins: 1 5V, 2 GND, 3 3V3, 4 GPIO20, 5 GPIO21, 6 GPIO2,
 #   7 GPIO1, 8 GPIO0 | 9 GPIO3, 10 GPIO4, 11 GPIO5/SDA, 12 GPIO6/SCL, 13 GPIO7, 14 GPIO8, 15 GPIO9, 16 GPIO10.
-# U3 = VL53L8CX red breakout (schematic symbol from the public library; on the PCB it is free TH pads U3_1..U3_9), 1x9: 1 VIN, 2 GND, 3 SDA/MOSI, 4 SCL/CLK, 5 MISO, 6 LPn, 7 INT, 8 NCS, 9 SPI_I2C_N
+# U3 = VL53L8CX red breakout (public-library part, footprint changed to 1x9 through-hole by Hog), 1x9: 1 VIN, 2 GND, 3 SDA/MOSI, 4 SCL/CLK, 5 MISO, 6 LPn, 7 INT, 8 NCS, 9 SPI_I2C_N
 # U2 = PC817C: 1 A, 2 K, 3 E, 4 C.  Q1 = 2N7000 TO-92: 1 S, 2 G, 3 D (check the datasheet pin order).
 # Diodes: pin 1 = K (band), pin 2 = A.  J2: 1 WHT (signal), 2 GRY (common).
 # Sensor runs I2C only: SPI_I2C_N tied to GND, NCS tied to 3V3, MISO not connected. SDA/SCL are shared with the on-board OLED (GPIO5/6).
