@@ -2,7 +2,7 @@
 # U1 = ESP32-C3 SuperMini with 0.42" OLED: BoosterTestJig library part ESP32-C3-OLED (footprint ESP32_C3_42OLED,
 #   two 1x8 rows 17.78 mm apart, pin 1 at the USB end). Pins: 1 5V, 2 GND, 3 3V3, 4 GPIO20, 5 GPIO21, 6 GPIO2,
 #   7 GPIO1, 8 GPIO0 | 9 GPIO3, 10 GPIO4, 11 GPIO5/SDA, 12 GPIO6/SCL, 13 GPIO7, 14 GPIO8, 15 GPIO9, 16 GPIO10.
-# U3 = VL53L8CX red breakout, 1x9: 1 VIN, 2 GND, 3 SDA/MOSI, 4 SCL/CLK, 5 MISO, 6 LPn, 7 INT, 8 NCS, 9 SPI_I2C_N
+# U3 = VL53L8CX red breakout (schematic symbol from the public library; on the PCB it is free TH pads U3_1..U3_9), 1x9: 1 VIN, 2 GND, 3 SDA/MOSI, 4 SCL/CLK, 5 MISO, 6 LPn, 7 INT, 8 NCS, 9 SPI_I2C_N
 # U2 = PC817C: 1 A, 2 K, 3 E, 4 C.  Q1 = 2N7000 TO-92: 1 S, 2 G, 3 D (check the datasheet pin order).
 # Diodes: pin 1 = K (band), pin 2 = A.  J2: 1 WHT (signal), 2 GRY (common).
 # Sensor runs I2C only: SPI_I2C_N tied to GND, NCS tied to 3V3, MISO not connected. SDA/SCL are shared with the on-board OLED (GPIO5/6).
@@ -38,17 +38,15 @@ D1.1 OPTO_A
 D1.2 OPTO_RET
 U2.3 GND
 U2.4 OPENER_IN
-R2.1 +3V3
-R2.2 OPENER_IN
-# buzzer (R3 100k gate pull-down; R6 0 ohm link). In the schematic BZ1, Q1, R6 and D2 join pin to pin, so
-# BUZ_DRAIN and BUZ_NEG show as unnamed nets there.
+R2.1 OPENER_IN
+R2.2 +3V3
+# buzzer (R3 100k gate pull-down). No series resistor: buzzer minus straight to the 2N7000 drain (loudest).
+# In the schematic BZ1, Q1 and D2 join by direct wires, so BUZ_NEG shows as an unnamed net there.
 Q1.1 GND
 Q1.2 BUZZER
-Q1.3 BUZ_DRAIN
+Q1.3 BUZ_NEG
 R3.1 GND
 R3.2 BUZZER
-R6.1 BUZ_DRAIN
-R6.2 BUZ_NEG
 BZ1.1 +5V
 BZ1.2 BUZ_NEG
 D2.1 +5V

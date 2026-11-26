@@ -16,27 +16,32 @@ without extra parts, and recharging means a ladder).
 Sensor VIN is wired to the C3 Zero's 3V3 pin: its level shifter drives I/O at VIN level, so 5 V there would put 5 V
 on ESP32 pins. Pololu rates the same design for 3.2-5.5 V **[unverified on this module]**.
 
-## 3. Pins (TENSTAR ESP32-C3 Zero) [unverified]
-Rows seen from the top with USB up: left 5V, GND, 3V3, 0, 1, 2, 3, 4, 5; right 21, 20, 19, 18, 10, 9, 8, 7, 6.
+## 3. Pins (ESP32-C3 SuperMini with 0.42" OLED) [unverified]
+BoosterTestJig library part ESP32-C3-OLED (footprint ESP32_C3_42OLED, two 1x8 rows 17.78 mm apart, pin 1 at USB).
+Mounted on the parts side so the OLED faces the floor; USB at the board's top edge.
 | GPIO | Net | Use |
 |---|---|---|
 | 0 | OPENER_IN | PC817C output, internal pull-up (R2 10k optional) |
-| 1 | BUZZER | 2N7000 gate |
+| 1 | BUZZER | 2N7000 gate (R3 100k pull-down) |
 | 3 | TOF_LPN | Sensor enable |
-| 4 | TOF_SCL | I2C clock |
-| 5 | BTN1 | Spare button to GND, internal pull-up |
-| 6 | TOF_SDA | I2C data |
-| 7 | BTN2 | Spare button to GND, internal pull-up |
-| 20 | TOF_INT | Sensor data ready |
-| 21 | LED_DATA | Future LED strip, 330 ohm |
-18/19 are USB D-/D+, 9 is BOOT, 2 and 8 are strapping pins, 10 is free: leave them unconnected.
+| 4 | TOF_INT | Sensor data ready |
+| 5 | TOF_SDA | I2C data, shared with the on-board OLED |
+| 6 | TOF_SCL | I2C clock, shared with the on-board OLED |
+| 7 | BTN1 | Spare button to GND, internal pull-up |
+| 10 | BTN2 | Spare button to GND, internal pull-up |
+| 20 | LED_DATA | Future LED strip, 330 ohm |
+Leave GPIO2, GPIO8 (on-board LED), GPIO9 (BOOT) and GPIO21 unconnected.
 
 ## 4. Sensor [unverified]
 VL53L8CX red breakout, 33 x 10 mm, 1x9 header: VIN, GND, SDA/MOSI, SCL/CLK, MISO, LPn, INT, NCS, SPI_I2C_N.
 Soldered flat on the board with its own straight header, facing the floor; two M2 nylon screws through its ears.
-I2C only: SPI_I2C_N tied to GND, NCS tied to 3V3, MISO not connected.
+I2C only: SPI_I2C_N tied to GND, NCS tied to 3V3, MISO not connected. Schematic symbol from the public library
+(its footprint is SMD, so it is left off the PCB); the PCB has free TH pads U3_1..U3_9, 33 x 10 mm silk, two M2 NPTH holes.
 
 ## 5. Opener input [unverified]
 J2 screw terminal -> R1 4.7k -> PC817C LED (D1 1N4148 reversed across it) -> back to J2. Both units in parallel on the
 opener's safety-sensor terminals (white = signal, grey = common on this opener). The push-in terminals take one wire
 each, so splice with lever nuts. Beam clear = ~156 Hz pulses; broken = no pulses. Units only listen.
+
+## 6. Buzzer [unverified]
+Passive 12 mm buzzer from +5V to the 2N7000 drain with no series resistor (loudest), 1N4148 flyback across it.
