@@ -1,11 +1,10 @@
 # EasyEDA Pro API notes (Run API Gateway bridge)
 
-## Scripts here
-- `v6/` (current layout): fan_route, pours, drcrun (pour rebuild + DRC), drconly, drcsum.py, dumpr, dumpid, setwide, rip,
-  relink_gnd, round_gnd, widen, gfix1-3, push_btn, push_bi, poll, rules.
-- `v4/` (older): z_drc (DRC without pour rebuild), z_rb (rebuild pours), g4 (dump pads/lines/vias), z_nl (schematic netlist),
-  imp (opens Import Changes), rz2.py (render a region).
-- The Python grid router ran in the claude.ai cloud and isn't on this PC; its source is in the claude.ai project doc `claude/propboard-router.md`.
+## Scripts here (ParkingGuide)
+- `scripts/sch_place.js` places all parts; `gen_wires.py <pins.json>` turns netlist.txt into `scripts/_sch_wire.js`
+  (stub wire + net port per pin) from `sch_wire.tpl.js`; `sch_r6_zero.js`, `sch_sw_diag.js` were one-off edits.
+- `run_layout.py scripts/pcb_place.js` / `pcb_mech.js` (outline, holes, vias, keepout, silk); `rules.js`; `renet.js`; `pours.js`;
+  `drcsum.js` (counts) / `drcfull.js` (every item): start, then poll `globalThis.__d`.
 
 ## Gotchas
 - Bridge calls time out at ~30 s (autorouter up to 60 s). Work in small batches. Avoid `sch_Netlist.getNetlist()` and `lib_Footprint.get()` (too slow).
@@ -56,3 +55,20 @@
 - Board scripts take hardware/layout.json via `python run_layout.py scripts/<file>.js`.
 - Wires to a pin marked no-connect fail with "create failed!": clear it with pin.toAsync(); pin.setState_NoConnected(false); await pin.done().
 - PCB component pad nets can be changed directly: `pcb_PrimitivePad.modify(padId, {net})` (no Import Changes needed).
+
+## Learned on ParkingGuide (2026-11-25)
+- `dmt_Project.createProject(name, name)` works; with a teamUuid argument it silently returns nothing. New projects come with
+  Board1 (schematic + PCB). `getCurrentProjectInfo().data` gives the page and PCB IDs.
+- Parts from another project's library (BoosterTestJig's BUZZER / 2N7000) hang `sch_PrimitiveComponent.create`: use the
+  system-library device with the same LCSC number.
+- **PCB nets are registered only when Import Changes first ADDS a component.** Re-importing changed parts does not register
+  them, and the net list can drop to only the free-pad nets (`pcb_Net.getAllNetsName()` shows it). Then autorouter and DRC
+  ignore those pads. Fix: delete all PCB components, `importChanges()`, designer clicks Apply, then re-place
+  (`pcb_PrimitiveComponent.modify` x/y/rotation keeps the nets). Check getAllNetsName after every step.
+- With nets registered, `pcb_Document.autoRouting({layers:[1,2], ignoreNets:["GND"]})` routed everything in seconds, then
+  `{RoutingNets:["GND"]}` for GND. The RPC times out but the job finishes: poll globalThis. It obeys net track rules and keepout regions.
+- Keepout: `pcb_PrimitiveRegion.create(12, polygon, [5,6,7], name)` (no wires, fills, pours on all layers).
+- `pcb_PrimitiveVia.create(net, x, y, holeDiameter, diameter)`: hole first.
+- `pcb_PrimitivePad.getAll()` returns only free pads. Component pads: `pcb_PrimitiveComponent.getAllPinsByPrimitiveId`.
+- `rebuildCopperRegion()` returned undefined and no fill on this board: the designer rebuilds pours by hand.
+- `pcb_Drc.getNetRules()` lists only registered nets.

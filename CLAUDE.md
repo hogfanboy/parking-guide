@@ -34,10 +34,10 @@ is the Claude Doc linked in the README.
 3. User: EasyEDA menu API Gateway > Reconnect.
 4. From `tools/easyeda`: `python call.py health` (also `windows`, `exec '<js>'`, `execfile <file.js> [timeout_s]`).
 
-IDs: project `TBD`; schematic page `TBD`; PCB `TBD`. Start every PCB script with
-`await eda.dmt_EditorControl.openDocument("<PCB id>")` plus a short wait.
-The scripts in `tools/easyeda/scripts/` came from booster-test-jig: their document IDs and layout fields must be
-updated for this board before use.
+IDs: project `26da364c2d254c36b0df9d00a102bfa9`; schematic page `c793a3fad343d4e3`; PCB `a355d18183ca4a75`. Start every PCB script with
+`await eda.dmt_EditorControl.openDocument("a355d18183ca4a75")` plus a short wait.
+Board scripts read hardware/layout.json via `python run_layout.py scripts/<file>.js`. After any Import Changes, check
+`pcb_Net.getAllNetsName()` lists all nets before routing (see API-NOTES).
 
 ## Build (firmware, once it exists)
 Arduino CLI: `/c/Users/hogfa/AppData/Local/Programs/arduino-cli/arduino-cli.exe` (not on PATH).

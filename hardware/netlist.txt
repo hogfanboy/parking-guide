@@ -44,7 +44,7 @@ U2.3 GND
 U2.4 OPENER_IN
 R2.1 +3V3
 R2.2 OPENER_IN
-# buzzer
+# buzzer (R3 100k gate pull-down; R6 0 ohm link, buzzer current set by the buzzer itself)
 Q1.1 GND
 Q1.2 BUZZER
 Q1.3 BUZ_DRAIN
@@ -56,13 +56,14 @@ BZ1.1 +5V
 BZ1.2 BUZ_NEG
 D2.1 +5V
 D2.2 BUZ_NEG
-# spare buttons (GPIO2 and GPIO8 are strapping pins: pull-ups keep them high at boot)
+# spare buttons (GPIO2 and GPIO8 are strapping pins: pull-ups keep them high at boot).
+# Tactile switch: button net on pin 1, GND on the diagonal pin 4, which switches however the legs are paired.
 SW1.1 BTN1
-SW1.2 GND
+SW1.4 GND
 R7.1 +3V3
 R7.2 BTN1
 SW2.1 BTN2
-SW2.2 GND
+SW2.4 GND
 R8.1 +3V3
 R8.2 BTN2
 # future LED strip

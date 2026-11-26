@@ -1,5 +1,5 @@
 // Move every PCB component to hardware/layout.json positions (mm -> mil).
-await eda.dmt_EditorControl.openDocument("eb04a63bfb02ce56");
+await eda.dmt_EditorControl.openDocument("a355d18183ca4a75");
 await new Promise(r => setTimeout(r, 800));
 const L = __LAYOUT__;
 const mil = v => Math.round(v / 0.0254 * 1000) / 1000;
