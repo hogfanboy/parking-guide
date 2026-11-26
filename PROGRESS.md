@@ -13,10 +13,11 @@ Design the PCB in EasyEDA and order 5 boards (2 needed).
 - PCB V6 (2026-11-26): U1 centred, USB at the top edge; left-row parts on the left (J2, opto, Q1/R3, J3/R5),
   right-row parts on the right (buttons, BZ1/D2, C1/C2); U3 rotated 180 across the bottom between its M2 holes.
   Pin swap: OPENER_IN on GPIO20, LED_DATA on GPIO0. All nets routed except GND (1 mm power, 0.25 mm signals).
-- GND: one bottom pour created, but the API fill returns nothing. Waiting for Hog to try Rebuild Copper Region on
-  that one pour by hand; fallback is GND tracks between parts, mounting holes left unconnected.
+- GND on tracks (1 mm, autorouted), no pour: pours freeze EasyEDA on this PC, even a hand-drawn one with default
+  settings (cause unknown; the API pours also used a bad 0.2 mil line width). Mounting holes have no net (plain
+  plated holes, no stitching vias). DRC 0 errors (2026-11-26). 2 routing vias.
 
 ## Next step
-1. Fill the GND pour (or GND tracks), DRC 0. Hog: check the 2D and 3D views (OLED facing the floor side, USB at the top edge, sensor clear).
+1. Hog: check the 2D and 3D views (OLED facing the floor side, USB at the top edge, sensor clear).
 2. Calipers on the sensor once it arrives (header position, ear-hole spacing), then re-place U3 and re-route.
 3. Order 5 boards.

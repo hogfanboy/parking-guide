@@ -18,7 +18,9 @@
   Via-to-track clearance ~ 12 + half-width + 6 mil.
 - `pcb_PrimitiveLine.create(net, layer 1|2, x0, y0, x1, y1, width)`; `.modify(id,{lineWidth})` sometimes throws
   "reading 'isAsync'": try/catch and retry.
-- Pour: `eda.pcb_PrimitivePour.create("GND", layer, eda.pcb_MathPolygon.createPolygon([-20,-380,"L",-20,380,3570,380,3570,-380,-20,-380]), "solid", false, name, 1, 0.2, false)`
+- Pour: `eda.pcb_PrimitivePour.create("GND", layer, polygon, "solid", false, name, 1, 10, false)`. The 8th argument is the
+  pour line width in MIL; the old value 0.2 is far too fine. **On Hog's PC every pour rebuild freezes EasyEDA**, even a
+  hand-drawn pour with default settings (2026-11-26, cause unknown): route GND as tracks and leave holes unconnected.
   then `rebuildCopperRegion()`. Trust DRC for islands.
 - Rules: `pcb_Drc.getCurrentRuleConfiguration()` / `overwriteCurrentRuleConfiguration(config)`; `getNetRules()` / `overwriteNetRules(list)`.
 - In-place pad edits (`setState_Pad`) don't update pour clearance: edit footprints instead. Pad shape string 'OVAL'.
@@ -70,7 +72,7 @@
 - Keepout: `pcb_PrimitiveRegion.create(12, polygon, [5,6,7], name)` (no wires, fills, pours on all layers).
 - `pcb_PrimitiveVia.create(net, x, y, holeDiameter, diameter)`: hole first.
 - `pcb_PrimitivePad.getAll()` returns only free pads. Component pads: `pcb_PrimitiveComponent.getAllPinsByPrimitiveId`.
-- `rebuildCopperRegion()` returned undefined and no fill on this board: the designer rebuilds pours by hand.
+- `rebuildCopperRegion()` returns undefined with no fill here; rebuilding by hand (Shift+B or right-click) freezes EasyEDA.
 - `pcb_Drc.getNetRules()` lists only registered nets.
 - **`pcb_PrimitivePad.getAll()` can return component pads too** (it did once routing existed). Deleting from it with a
   loose filter removed the footprints' pads and the whole PCB net list. Only delete pads by your own names (MH*/EH*).
