@@ -1,0 +1,71 @@
+# ParkingGuide V1 netlist: designator.pin NET. Source of truth for the schematic script. [unverified]
+# U1 = ESP32-C3 SuperMini with 0.42" OLED: BoosterTestJig library part ESP32-C3-OLED (footprint ESP32_C3_42OLED,
+#   two 1x8 rows 17.78 mm apart, pin 1 at the USB end). Pins: 1 5V, 2 GND, 3 3V3, 4 GPIO20, 5 GPIO21, 6 GPIO2,
+#   7 GPIO1, 8 GPIO0 | 9 GPIO3, 10 GPIO4, 11 GPIO5/SDA, 12 GPIO6/SCL, 13 GPIO7, 14 GPIO8, 15 GPIO9, 16 GPIO10.
+# U3 = VL53L8CX red breakout (public-library part, footprint changed to 1x9 through-hole by Hog), 1x9: 1 VIN, 2 GND, 3 SDA/MOSI, 4 SCL/CLK, 5 MISO, 6 LPn, 7 INT, 8 NCS, 9 SPI_I2C_N
+# U2 = PC817C: 1 A, 2 K, 3 E, 4 C.  Q1 = 2N7000 TO-92: 1 S, 2 G, 3 D (check the datasheet pin order).
+# Diodes: pin 1 = K (band), pin 2 = A.  J2: 1 WHT (signal), 2 GRY (common).
+# Sensor runs I2C only: SPI_I2C_N tied to GND, NCS tied to 3V3, MISO not connected. SDA/SCL are shared with the on-board OLED (GPIO5/6).
+# Unused: GPIO21, GPIO2, GPIO8 (on-board LED), GPIO9 (BOOT).
+U1.1 +5V
+U1.2 GND
+U1.3 +3V3
+U1.4 OPENER_IN
+U1.7 BUZZER
+U1.8 LED_DATA
+U1.9 TOF_LPN
+U1.10 TOF_INT
+U1.11 TOF_SDA
+U1.12 TOF_SCL
+U1.13 BTN1
+U1.16 BTN2
+U3.1 +3V3
+U3.2 GND
+U3.3 TOF_SDA
+U3.4 TOF_SCL
+U3.6 TOF_LPN
+U3.7 TOF_INT
+U3.8 +3V3
+U3.9 GND
+# opener input (isolated side: OPTO_* nets never touch GND)
+J2.1 OPTO_IN
+J2.2 OPTO_RET
+R1.1 OPTO_IN
+R1.2 OPTO_A
+U2.1 OPTO_A
+U2.2 OPTO_RET
+D1.1 OPTO_A
+D1.2 OPTO_RET
+U2.3 GND
+U2.4 OPENER_IN
+R2.1 OPENER_IN
+R2.2 +3V3
+# buzzer (R3 100k gate pull-down). No series resistor: buzzer minus straight to the 2N7000 drain (loudest).
+# In the schematic BZ1, Q1 and D2 join by direct wires, so BUZ_NEG shows as an unnamed net there.
+Q1.1 GND
+Q1.2 BUZZER
+Q1.3 BUZ_NEG
+R3.1 GND
+R3.2 BUZZER
+BZ1.1 +5V
+BZ1.2 BUZ_NEG
+D2.1 +5V
+D2.2 BUZ_NEG
+# spare buttons on GPIO7 / GPIO10, to GND, internal pull-ups in firmware.
+# Tactile switch (6x6 vertical, pads 1 TL, 2 TR, 3 BL, 4 BR): button net on pin 1, GND on the diagonal pin 4.
+SW1.1 BTN1
+SW1.4 GND
+SW2.1 BTN2
+SW2.4 GND
+# future LED strip
+R5.1 LED_DATA
+R5.2 LED_OUT
+J3.1 +5V
+J3.2 LED_OUT
+J3.3 GND
+# power
+C1.1 +5V
+C1.2 GND
+C2.1 +3V3
+C2.2 GND
+# H1-H4: 3.2 mm plated mounting holes on GND

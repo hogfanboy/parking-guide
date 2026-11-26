@@ -1,0 +1,195 @@
+{
+ "_note": "Board mm, origin bottom-left, y up, rotation deg (EasyEDA footprint origins: U1 = its pad 1, others = centre). U1 = ESP32-C3 SuperMini OLED, pad 1 (5V) at the USB end, top. Sensor header and ear-hole spacing are ESTIMATES until measured.",
+ "_layout": "ESP (U1) centred, USB at the top edge. Left of U1 (its left-row pins): opener terminal J2 top, opto block, buzzer driver Q1/R3, LED header J3/R5. Right (right-row pins): buttons, buzzer BZ1 + flyback D2, C1/C2. Sensor U3 across the bottom, rotated so its I2C pins face the right row. Antenna keepout between U1's far end and the sensor.",
+ "board": [
+  64,
+  46
+ ],
+ "parts": {
+  "U1": [
+   23.11,
+   42.5,
+   0
+  ],
+  "U3": [
+   32.0,
+   8.5,
+   180
+  ],
+  "J2": [
+   15.0,
+   42.0,
+   0
+  ],
+  "U2": [
+   11.5,
+   32.0,
+   0
+  ],
+  "R1": [
+   4.0,
+   31.25,
+   90
+  ],
+  "R2": [
+   19.0,
+   32.3,
+   90
+  ],
+  "D1": [
+   11.5,
+   25.5,
+   0
+  ],
+  "Q1": [
+   17.5,
+   21.5,
+   0
+  ],
+  "R3": [
+   8.5,
+   18.5,
+   0
+  ],
+  "J3": [
+   9.0,
+   11.0,
+   0
+  ],
+  "R5": [
+   8.5,
+   14.8,
+   0
+  ],
+  "BZ1": [
+   56.0,
+   20.5,
+   0
+  ],
+  "D2": [
+   48.0,
+   22.0,
+   90
+  ],
+  "SW1": [
+   53.0,
+   37.5,
+   0
+  ],
+  "SW2": [
+   53.0,
+   30.5,
+   0
+  ],
+  "C1": [
+   46.3,
+   42.6,
+   0
+  ],
+  "C2": [
+   52.0,
+   9.0,
+   0
+  ]
+ },
+ "sensor": {
+  "_part": "VL53L8CX red breakout 33 x 10 mm, 1x9 header 2.54 mm, two ear holes for M2 nylon screws",
+  "ear_holes": [
+   [
+    18.0,
+    12.0
+   ],
+   [
+    46.0,
+    12.0
+   ]
+  ],
+  "ear_hole_mm": 2.2,
+  "outline": [
+   15.5,
+   7.0,
+   48.5,
+   17.0
+  ],
+  "_header": "U3 header row along the module long edge 1.5 mm in (y 8.5), module centre (44.5, 12)"
+ },
+ "antenna_keepout": [
+  21.2,
+  18.0,
+  42.8,
+  23.0
+ ],
+ "mount_holes": {
+  "at": [
+   [
+    3.5,
+    3.5
+   ],
+   [
+    60.5,
+    3.5
+   ],
+   [
+    3.5,
+    42.5
+   ],
+   [
+    60.5,
+    42.5
+   ]
+  ],
+  "hole_mm": 3.2,
+  "pad_mm": 6.0,
+  "via": [
+   0.3,
+   0.6
+  ],
+  "via_offsets": [
+   [
+    2.4,
+    0.0
+   ],
+   [
+    1.2,
+    2.078
+   ],
+   [
+    -1.2,
+    2.078
+   ],
+   [
+    -2.4,
+    0.0
+   ],
+   [
+    -1.2,
+    -2.078
+   ],
+   [
+    1.2,
+    -2.078
+   ]
+  ]
+ },
+ "outlines": {
+  "U1_SuperMini": [
+   21.2,
+   23.0,
+   42.8,
+   45.5
+  ],
+  "U3_VL53L8CX": [
+   15.5,
+   7.0,
+   48.5,
+   17.0
+  ]
+ },
+ "labels": [
+  [
+   "ParkingGuide V1",
+   54,
+   2.0
+  ]
+ ]
+}
